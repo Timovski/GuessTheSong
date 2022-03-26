@@ -12,18 +12,45 @@
     <link rel="stylesheet" href="~/site.css" />
 </head>
 <body>
-    <button id="play-game-button" type="button" style="display: none;">Play</button>
+    <table class="main-table">
+        <tbody>
+            <tr class="top-row">
+                <td class="header" colspan="3">
+                    <h1> Guess The Song</h1>
+                </td>
+            </tr>
+            <tr class="middle-row">
+                <td class="left-column"></td>
+                <td class="center-column">
+                    <button id="play-game-button" type="button" style="display: none;">Play</button>
 
-    <h1 id="loading" style="display: none;">Loading...</h1>
+                    <h1 id="loading" style="display: none;">Loading...</h1>
 
-    <div id="controls-div" style="display: none;">
-        <h1>Guess The Song</h1>
-        <button id="play-pause-button">Toggle Play/Pause</button>
-        <button id="play-previous-song-button">Play Previous Song</button>
-        <button id="play-next-song-button">Play Next Song</button>
-        <button id="show-info-button">Show Info</button> <span id="info-span" style="display: none;"></span>
-    </div>
-
+                    <div id="controls-div" style="display: none;">
+                        <button id="play-pause-button">Toggle Play/Pause</button>
+                        <button id="play-previous-song-button">Play Previous Song</button>
+                        <button id="play-next-song-button">Play Next Song</button>
+                        <button id="show-info-button">Show Info</button> <span id="info-span" style="display: none;"></span>
+                    </div>
+                </td>
+                <td class="right-column"></td>
+            </tr>
+            <tr class="bottom-row">
+                <td class="footer" colspan="3">
+                    Powered by:
+                    <a href="https://www.spotify.com/" target="_blank" rel="noopener">
+                        <span>Spotify</span>
+                        <img alt="spotify logo" src="spotify-logo-32px.png" class="logo" />
+                    </a>
+                    |
+                    <a href="https://github.com/Timovski/GuessTheSong" target="_blank" rel="noopener">
+                        <span>GitHub</span>
+                        <img alt="github logo" src="GitHub-Mark-32px.png" class="logo" />
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
     <script>
         var clientId = "@Model.ClientId";
         var redirectUri = "@Model.RedirectUri";

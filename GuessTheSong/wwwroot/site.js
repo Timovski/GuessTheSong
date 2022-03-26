@@ -125,7 +125,7 @@ if (accessToken) {
         player.connect();
     };
 } else {
-    playGameButton.style.display = "block";
+    playGameButton.style.display = "inline-block";
 }
 
 function playNextSong() {
