@@ -1,4 +1,14 @@
-﻿var playGameButton = document.getElementById("play-game-button");
+﻿var pageContainer = document.getElementById("page-container");
+var welcomeContainer = document.getElementById("welcome-container");
+var playGameButton = document.getElementById("play-game-button");
+
+var welcomeInfoContainer = document.getElementById("welcome-info-container");
+var welcomeMoreInfoLink = document.getElementById("welcome-more-info-link");
+var welcomeMoreInfoContainer = document.getElementById("welcome-more-info-container");
+
+var spotifyPremiumInfoLink = document.getElementById("spotify-premium-info-link");
+var spotifyPremiumInfoContainer = document.getElementById("spotify-premium-info-container");
+
 var playPauseButton = document.getElementById("play-pause-button");
 var playNextSongButton = document.getElementById("play-next-song-button");
 var playPreviousSongButton = document.getElementById("play-previous-song-button");
@@ -11,6 +21,18 @@ var deviceId = null;
 var trackIndex = -1;
 var paused = false;
 var lastAutoStart = new Date();
+var backgroundColors = ["AliceBlue", "AntiqueWhite", "Aquamarine", "Azure", "Beige", "Bisque", "BlanchedAlmond", "Cornsilk", "FloralWhite", "GhostWhite", "GreenYellow", "HoneyDew", "Ivory", "Khaki", "Lavender", "LavenderBlush", "LemonChiffon", "LightBlue", "LightCyan", "LightGoldenrodYellow", "LightGreen", "LightPink", "LightSalmon", "LightSkyBlue", "LightSteelBlue", "LightYellow", "Linen", "MediumAquamarine", "MintCream", "MistyRose", "Moccasin", "NavajoWhite", "OldLace", "PaleGoldenrod", "PaleGreen", "PaleTurquoise", "PapayaWhip", "PeachPuff", "Pink", "Plum", "PowderBlue", "SeaShell", "SkyBlue", "Snow", "Thistle", "Wheat", "White", "WhiteSmoke", "YellowGreen"];
+
+welcomeMoreInfoLink.onclick = function () {
+    //welcomeMoreInfoLink.parentElement.removeChild(welcomeMoreInfoLink);
+    welcomeMoreInfoContainer.style.display = "inline-block";
+};
+
+spotifyPremiumInfoLink.onclick = function (event) {
+    event.stopPropagation();
+    //spotifyPremiumInfoLink.parentElement.removeChild(spotifyPremiumInfoLink);
+    spotifyPremiumInfoContainer.style.display = "inline-block";
+};
 
 playGameButton.onclick = function () {
     var generateRandomString = function (length) {
@@ -34,7 +56,7 @@ playGameButton.onclick = function () {
         state: state
     });
 
-    playGameButton.style.display = "none";
+    //playGameButton.style.display = "none";
     window.location.href = authUri + authQueryParameters.toString();
 };
 
@@ -42,8 +64,10 @@ if (accessToken) {
     updatePlayButtons();
 
     window.history.replaceState(null, null, window.location.pathname);
+
     loading.style.display = "block";
-    playGameButton.style.display = "none";
+    changeBackgroundColor();
+    //playGameButton.style.display = "none";
 
     window.onSpotifyWebPlaybackSDKReady = function () {
         var player = new Spotify.Player({
@@ -56,8 +80,8 @@ if (accessToken) {
             deviceId = response.device_id;
             console.log("Ready with Device ID", response.device_id);
 
-            controlsDiv.style.display = "block";
             loading.style.display = "none";
+            controlsDiv.style.display = "block";
         });
 
         player.addListener("not_ready", function (response) {
@@ -125,7 +149,8 @@ if (accessToken) {
         player.connect();
     };
 } else {
-    playGameButton.style.display = "inline-block";
+    //playGameButton.style.display = "inline-block";
+    welcomeContainer.style.display = "block";
 }
 
 function playNextSong() {
@@ -161,6 +186,8 @@ function playSong(track) {
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.setRequestHeader("Authorization", "Bearer " + accessToken);
     xhr.send(JSON.stringify({ uris: ["spotify:track:" + track] }));
+
+    changeBackgroundColor();
 }
 
 function updatePlayButtons() {
@@ -176,6 +203,12 @@ function updatePlayButtons() {
         playPreviousSongButton.disabled = false;
     }
 }
+
+function changeBackgroundColor() {
+    var backgroundColor = backgroundColors[Math.floor(Math.random() * backgroundColors.length)];
+    pageContainer.style.backgroundColor = backgroundColor;
+    document.getElementById("header").innerText = backgroundColor;
+};
 
 function log(code) {
     var xhr = new XMLHttpRequest();

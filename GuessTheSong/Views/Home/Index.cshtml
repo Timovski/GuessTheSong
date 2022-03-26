@@ -12,45 +12,56 @@
     <link rel="stylesheet" href="~/site.css" />
 </head>
 <body>
-    <table class="main-table">
-        <tbody>
-            <tr class="top-row">
-                <td class="header" colspan="3">
-                    <h1> Guess The Song</h1>
-                </td>
-            </tr>
-            <tr class="middle-row">
-                <td class="left-column"></td>
-                <td class="center-column">
-                    <button id="play-game-button" type="button" style="display: none;">Play</button>
-
-                    <h1 id="loading" style="display: none;">Loading...</h1>
-
-                    <div id="controls-div" style="display: none;">
-                        <button id="play-pause-button">Toggle Play/Pause</button>
-                        <button id="play-previous-song-button">Play Previous Song</button>
-                        <button id="play-next-song-button">Play Next Song</button>
-                        <button id="show-info-button">Show Info</button> <span id="info-span" style="display: none;"></span>
+    <div id="page-container">
+        <div class="header">
+            <h1 id="header"> Guess The Song</h1>
+        </div>
+        <div class="content">
+            <div id="welcome-container" style="display: none;">
+                <p id="welcome-info-container" class="info-container">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor <span id="welcome-more-info-link" class="link">More info...</span>
+                </p>
+                <p id="welcome-more-info-container" class="info-container" style="display: none;">
+                    Incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+                <br>
+                <div id="play-game-button" class="button">
+                    <img class="play-button-img" alt="spotify logo" src="spotify-logo-32px.png">
+                    <div class="play-button-text-container">
+                        <div class="play-button-play">
+                            PLAY
+                        </div>
+                        <div class="play-button-info">
+                            (Spotify premium account required. <span id="spotify-premium-info-link" class="link">More info...</span>)
+                        </div>
                     </div>
-                </td>
-                <td class="right-column"></td>
-            </tr>
-            <tr class="bottom-row">
-                <td class="footer" colspan="3">
-                    Powered by:
-                    <a href="https://www.spotify.com/" target="_blank" rel="noopener">
-                        <span>Spotify</span>
-                        <img alt="spotify logo" src="spotify-logo-32px.png" class="logo" />
-                    </a>
-                    |
-                    <a href="https://github.com/Timovski/GuessTheSong" target="_blank" rel="noopener">
-                        <span>GitHub</span>
-                        <img alt="github logo" src="GitHub-Mark-32px.png" class="logo" />
-                    </a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+                </div>
+                <br>
+                <p id="spotify-premium-info-container" class="info-container" style="display: none;">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+            </div>
+            <h1 id="loading" style="display: none;">Loading...</h1>
+            <div id="controls-div" style="display: none;">
+                <button id="play-pause-button">Toggle Play/Pause</button>
+                <button id="play-previous-song-button">Play Previous Song</button>
+                <button id="play-next-song-button">Play Next Song</button>
+                <button id="show-info-button">Show Info</button> <span id="info-span" style="display: none;"></span>
+            </div>
+        </div>
+        <div class="footer">
+            Powered by:
+            <a href="https://www.spotify.com/" target="_blank" rel="noopener">
+                <span>Spotify</span>
+                <img alt="spotify logo" src="spotify-logo-32px.png" class="logo" />
+            </a>
+            |
+            <a href="https://github.com/Timovski/GuessTheSong" target="_blank" rel="noopener">
+                <span>GitHub</span>
+                <img alt="github logo" src="GitHub-Mark-32px.png" class="logo" />
+            </a>
+        </div>
+    </div>
     <script>
         var clientId = "@Model.ClientId";
         var redirectUri = "@Model.RedirectUri";
