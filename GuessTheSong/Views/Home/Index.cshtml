@@ -1,0 +1,41 @@
+﻿@model GuessTheSong.Models.DataModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="description" content="A simple song guessing game to play with your friends">
+    <meta name="keywords" content="song,songs,guess,guessing,friends,social,game">
+    <meta name="author" content="Stefan Timovski">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guess The Song</title>
+    <link rel="stylesheet" href="~/site.css" />
+</head>
+<body>
+    <button id="play-game-button" type="button" style="display: none;">Play</button>
+
+    <h1 id="loading" style="display: none;">Loading...</h1>
+
+    <div id="controls-div" style="display: none;">
+        <h1>Guess The Song</h1>
+        <button id="play-pause-button">Toggle Play/Pause</button>
+        <button id="play-previous-song-button">Play Previous Song</button>
+        <button id="play-next-song-button">Play Next Song</button>
+        <button id="show-info-button">Show Info</button> <span id="info-span" style="display: none;"></span>
+    </div>
+
+    <script>
+        var clientId = "@Model.ClientId";
+        var redirectUri = "@Model.RedirectUri";
+        var authUri = "@Model.AuthUri";
+        var playUri = "@Model.PlayUri";
+        var accessToken = "@Model.AccessToken";
+    </script>
+    @if (!string.IsNullOrWhiteSpace(Model.AccessToken))
+    {
+        <script src="https://sdk.scdn.co/spotify-player.js"></script>
+        <script src="~/songs.js"></script>
+    }
+    <script src="~/site.js"></script>
+</body>
+</html>
