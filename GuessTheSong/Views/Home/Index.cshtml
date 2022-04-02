@@ -41,23 +41,70 @@
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                 </p>
             </div>
-            <h1 id="loading" style="display: none;">Loading...</h1>
+            <div>
+                <h1 id="loading" style="display: none;">Loading...</h1>
+            </div>
             <div id="controls-div" style="display: none;">
-                <button id="play-pause-button">Toggle Play/Pause</button>
-                <button id="play-previous-song-button">Play Previous Song</button>
-                <button id="play-next-song-button">Play Next Song</button>
-                <button id="show-info-button">Show Info</button> <span id="info-span" style="display: none;"></span>
+                <div id="toggle-play-pause-button" class="button">
+                    <span class="icon-pause"></span>
+                    <div class="play-button-text-container">
+                        <div class="play-button-play">
+                            Toggle Play/Pause
+                        </div>
+                        <div class="play-button-info">
+                            (p)
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div id="play-previous-song-button" class="button">
+                    <span class="icon-previous"></span>
+                    <div class="play-button-text-container">
+                        <div class="play-button-play">
+                            Play Previous Song
+                        </div>
+                        <div class="play-button-info">
+                            (backspace)
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div id="play-next-song-button" class="button">
+                    <span class="icon-next"></span>
+                    <div class="play-button-text-container">
+                        <div class="play-button-play">
+                            Play Next Song
+                        </div>
+                        <div class="play-button-info">
+                            (space)
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div id="show-song-info-button" class="button">
+                    <span class="icon-info"></span>
+                    <div class="play-button-text-container">
+                        <div class="play-button-play">
+                            Show Info
+                        </div>
+                        <div class="play-button-info">
+                            (enter)
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <span id="info-span" style="display: none;"></span>
             </div>
         </div>
         <div class="footer">
             Powered by:
             <a href="https://www.spotify.com/" target="_blank" rel="noopener">
-                <span>Spotify</span>
+                <span class="link">Spotify</span>
                 <span class="icon-spotify"></span>
             </a>
             |
             <a href="https://github.com/Timovski/GuessTheSong" target="_blank" rel="noopener">
-                <span>GitHub</span>
+                <span class="link">GitHub</span>
                 <span class="icon-github"></span>
             </a>
         </div>

@@ -9,19 +9,19 @@ var welcomeMoreInfoContainer = document.getElementById("welcome-more-info-contai
 var spotifyPremiumInfoLink = document.getElementById("spotify-premium-info-link");
 var spotifyPremiumInfoContainer = document.getElementById("spotify-premium-info-container");
 
-var playPauseButton = document.getElementById("play-pause-button");
-var playNextSongButton = document.getElementById("play-next-song-button");
-var playPreviousSongButton = document.getElementById("play-previous-song-button");
-var showInfoButton = document.getElementById("show-info-button");
-var infoSpan = document.getElementById("info-span");
 var controlsDiv = document.getElementById("controls-div");
 var loading = document.getElementById("loading");
+var togglePlayPauseButton = document.getElementById("toggle-play-pause-button");
+var playPreviousSongButton = document.getElementById("play-previous-song-button");
+var playNextSongButton = document.getElementById("play-next-song-button");
+var showSongInfoButton = document.getElementById("show-song-info-button");
+var infoSpan = document.getElementById("info-span");
 
+var player = null;
 var deviceId = null;
 var trackIndex = -1;
 var paused = false;
 var lastAutoStart = new Date();
-var backgroundColors = ["AliceBlue", "AntiqueWhite", "Aquamarine", "Azure", "Beige", "Bisque", "BlanchedAlmond", "Cornsilk", "FloralWhite", "GhostWhite", "GreenYellow", "HoneyDew", "Ivory", "Khaki", "Lavender", "LavenderBlush", "LemonChiffon", "LightBlue", "LightCyan", "LightGoldenrodYellow", "LightGreen", "LightPink", "LightSalmon", "LightSkyBlue", "LightSteelBlue", "LightYellow", "Linen", "MediumAquamarine", "MintCream", "MistyRose", "Moccasin", "NavajoWhite", "OldLace", "PaleGoldenrod", "PaleGreen", "PaleTurquoise", "PapayaWhip", "PeachPuff", "Pink", "Plum", "PowderBlue", "SeaShell", "SkyBlue", "Snow", "Thistle", "Wheat", "White", "WhiteSmoke", "YellowGreen"];
 
 welcomeMoreInfoLink.onclick = function () {
     //welcomeMoreInfoLink.parentElement.removeChild(welcomeMoreInfoLink);
@@ -35,29 +35,7 @@ spotifyPremiumInfoLink.onclick = function (event) {
 };
 
 playGameButton.onclick = function () {
-    var generateRandomString = function (length) {
-        var text = "";
-        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-        for (var i = 0; i < length; i++) {
-            text += possible.charAt(Math.floor(Math.random() * possible.length));
-        }
-        return text;
-    };
-
-    var scope = "streaming user-read-email user-read-private";
-    var state = generateRandomString(16);
-
-    var authQueryParameters = new URLSearchParams({
-        response_type: "code",
-        client_id: clientId,
-        scope: scope,
-        redirect_uri: redirectUri,
-        state: state
-    });
-
-    //playGameButton.style.display = "none";
-    window.location.href = authUri + authQueryParameters.toString();
+    playGame();
 };
 
 if (accessToken) {
@@ -70,7 +48,7 @@ if (accessToken) {
     //playGameButton.style.display = "none";
 
     window.onSpotifyWebPlaybackSDKReady = function () {
-        var player = new Spotify.Player({
+        player = new Spotify.Player({
             name: "Guess The Song Player",
             getOAuthToken: function (cb) { cb(accessToken); },
             volume: 1
@@ -78,15 +56,12 @@ if (accessToken) {
 
         player.addListener("ready", function (response) {
             deviceId = response.device_id;
-            console.log("Ready with Device ID", response.device_id);
 
             loading.style.display = "none";
             controlsDiv.style.display = "block";
         });
 
-        player.addListener("not_ready", function (response) {
-            console.log("Device ID has gone offline", response.device_id);
-        });
+        player.addListener("not_ready", function (response) { });
 
         player.addListener("initialization_error", function (response) {
             console.error(response.message);
@@ -119,31 +94,20 @@ if (accessToken) {
             }
         });
 
-        playPauseButton.onclick = function () {
-            // player.togglePlay();
-
-            if (paused) {
-                player.resume().then(function () {
-                    paused = false;
-                });
-            } else {
-                player.pause().then(function () {
-                    paused = true;
-                });
-            }
-        };
-
-        playNextSongButton.onclick = function () {
-            playNextSong();
+        togglePlayPauseButton.onclick = function () {
+            togglePlayPause();
         };
 
         playPreviousSongButton.onclick = function () {
             playPreviousSong();
         };
 
-        showInfoButton.onclick = function () {
-            infoSpan.innerText = songs[trackIndex].artist + " - " + songs[trackIndex].name;
-            infoSpan.style.display = "inline";
+        playNextSongButton.onclick = function () {
+            playNextSong();
+        };
+
+        showSongInfoButton.onclick = function () {
+            showSongInfo();
         };
 
         player.connect();
@@ -153,23 +117,116 @@ if (accessToken) {
     welcomeContainer.style.display = "block";
 }
 
+window.onkeydown = function (e) {
+    if (e.key == "p" ||
+        e.code == "KeyP" ||
+        e.keyCode == 80
+    ) {
+        if (player) {
+            togglePlayPause();
+        }
+    }
+
+    if (e.key == "Backspace" ||
+        e.code == "Backspace" ||
+        e.keyCode == 8
+    ) {
+        if (player) {
+            playPreviousSong();
+        }
+    }
+
+    if (e.key == " " ||
+        e.code == "Space" ||
+        e.keyCode == 32
+    ) {
+        if (player) {
+            playNextSong();
+        }
+        else {
+            playGame();
+        }
+    }
+
+    if (e.key == "Enter" ||
+        e.code == "Enter" ||
+        e.keyCode == 13
+    ) {
+        if (player) {
+            showSongInfo();
+        }
+        else {
+            playGame();
+        }
+    }
+};
+
+function playGame() {
+    var generateRandomString = function (length) {
+        var text = "";
+        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+        for (var i = 0; i < length; i++) {
+            text += possible.charAt(Math.floor(Math.random() * possible.length));
+        }
+        return text;
+    };
+
+    var scope = "streaming user-read-email user-read-private";
+    var state = generateRandomString(16);
+
+    var authQueryParameters = new URLSearchParams({
+        response_type: "code",
+        client_id: clientId,
+        scope: scope,
+        redirect_uri: redirectUri,
+        state: state
+    });
+
+    //playGameButton.style.display = "none";
+    window.location.href = authUri + authQueryParameters.toString();
+}
+
+function togglePlayPause() {
+    // player.togglePlay();
+
+    if (paused) {
+        player.resume().then(function () {
+            paused = false;
+        });
+    } else {
+        player.pause().then(function () {
+            paused = true;
+        });
+    }
+}
+
 function playNextSong() {
     infoSpan.style.display = "none";
 
-    trackIndex++;
-    if (trackIndex < songs.length) {
+    if (trackIndex < songs.length - 1) {
+        trackIndex++;
         playSong(songs[trackIndex].spotifyTrack);
         updatePlayButtons();
+        paused = false;
     }
 }
 
 function playPreviousSong() {
     infoSpan.style.display = "none";
 
-    trackIndex--;
-    if (trackIndex >= 0) {
+    if (trackIndex > 0) {
+        trackIndex--;
         playSong(songs[trackIndex].spotifyTrack);
         updatePlayButtons();
+        paused = false;
+    }
+}
+
+function showSongInfo() {
+    if (trackIndex >= 0) {
+        infoSpan.innerText = songs[trackIndex].artist + " - " + songs[trackIndex].name;
+        infoSpan.style.display = "inline";
     }
 }
 
@@ -192,20 +249,20 @@ function playSong(track) {
 
 function updatePlayButtons() {
     if (trackIndex >= songs.length - 1) {
-        playNextSongButton.disabled = true;
+        playNextSongButton.classList.add("disabled");
     } else {
-        playNextSongButton.disabled = false;
+        playNextSongButton.classList.remove("disabled");
     }
 
     if (trackIndex < 1) {
-        playPreviousSongButton.disabled = true;
+        playPreviousSongButton.classList.add("disabled");
     } else {
-        playPreviousSongButton.disabled = false;
+        playPreviousSongButton.classList.remove("disabled");
     }
 }
 
 function changeBackgroundColor() {
-    var backgroundColor = backgroundColors[Math.floor(Math.random() * backgroundColors.length)];
+    var backgroundColor = "hsl(" + getRandomNumber(0, 360) + ", 100%, 95%)";
     pageContainer.style.backgroundColor = backgroundColor;
     document.getElementById("header").innerText = backgroundColor;
 };
@@ -215,4 +272,8 @@ function log(code) {
     xhr.open("POST", "/Home/Log", true);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(JSON.stringify({ Code: code }));
+}
+
+function getRandomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
