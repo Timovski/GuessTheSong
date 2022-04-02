@@ -1,3 +1,54 @@
+/*#region Font*/
+
+@font-face {
+    font-family: 'icomoon';
+    src: url('fonts/icomoon.eot?2953vl');
+    src: url('fonts/icomoon.eot?2953vl#iefix') format('embedded-opentype'), url('fonts/icomoon.ttf?2953vl') format('truetype'), url('fonts/icomoon.woff?2953vl') format('woff'), url('fonts/icomoon.svg?2953vl#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-play:before {
+    content: "\e900";
+}
+
+.icon-pause:before {
+    content: "\e901";
+}
+
+.icon-next:before {
+    content: "\e902";
+}
+
+.icon-previous:before {
+    content: "\e903";
+}
+
+.icon-spotify:before {
+    content: "\e904";
+}
+
+.icon-github:before {
+    content: "\e905";
+}
+
+/*#endregion Font*/
+
 * {
     margin: 0px;
     padding: 0px;
@@ -5,34 +56,6 @@
 
 html, body {
     height: 100%;
-}
-
-.logo {
-    height: 16px;
-    margin-left: 4px;
-    vertical-align: middle;
-    padding-bottom: 3px;
-}
-
-.footer {
-    text-align: center;
-}
-
-    .footer a {
-        text-decoration: none;
-    }
-
-    .footer span {
-        text-decoration: underline;
-    }
-
-#page-container {
-    height: 100%;
-    background-color: darkslategray;
-    -webkit-transition-duration: 3s;
-    -moz-transition-duration: 3s;
-    -o-transition-duration: 3s;
-    transition-duration: 3s;
 }
 
 .header {
@@ -47,6 +70,28 @@ html, body {
 .footer {
     height: 10%;
     text-align: center;
+}
+
+    .footer a {
+        text-decoration: none;
+        color: black;
+    }
+
+    .footer span {
+        text-decoration: underline;
+    }
+
+    .footer [class^="icon-"], .footer [class*=" icon-"] {
+        text-decoration: none;
+    }
+
+#page-container {
+    height: 100%;
+    background-color: darkslategray;
+    -webkit-transition-duration: 3s;
+    -moz-transition-duration: 3s;
+    -o-transition-duration: 3s;
+    transition-duration: 3s;
 }
 
 .info-container {
@@ -69,34 +114,49 @@ html, body {
     width: 300px;
     height: 50px;
     margin-top: 20px;
-    border: 3px solid #4CAF50;
-    border-radius: 8px;
+    border: 2px solid #4CAF50;
+    border-radius: 4px;
     cursor: pointer;
+    text-align: left;
     -webkit-transition-duration: 0.4s;
     -moz-transition-duration: 0.4s;
     -o-transition-duration: 0.4s;
     transition-duration: 0.4s;
+    -webkit-transition-timing-function: ease-out;
+    -moz-transition-timing-function: ease-out;
+    -o-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
 }
 
-    .play-button:hover {
-        background-color: rgba(59, 155, 102, 1);
-        color: white;
+    .button [class^="icon-"], [class*=" icon-"] {
+        font-size: 50px;
+        margin-left: 2px;
+        -webkit-transition-duration: 0.2s;
+        -moz-transition-duration: 0.2s;
+        -o-transition-duration: 0.2s;
+        transition-duration: 0.2s;
+        -webkit-transition-timing-function: ease-out;
+        -moz-transition-timing-function: ease-out;
+        -o-transition-timing-function: ease-out;
+        transition-timing-function: ease-out;
     }
 
-.play-button-img {
-    height: 30px;
+#play-game-button:hover {
+    background-color: rgba(59, 155, 102, 1);
+    color: white;
 }
 
 .play-button-text-container {
     display: inline-block;
-    margin-left: 5px;
+    vertical-align: top;
 }
 
 .play-button-play {
-    font-size: 21px;
+    font-size: 30px;
     text-align: left;
+    line-height: 28px;
 }
 
 .play-button-info {
-    font-size: 9px;
+    font-size: 12px;
 }
