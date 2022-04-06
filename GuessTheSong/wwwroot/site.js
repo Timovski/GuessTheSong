@@ -11,12 +11,15 @@ var spotifyPremiumInfoContainer = document.getElementById("spotify-premium-info-
 
 var controlsDiv = document.getElementById("controls-div");
 var loading = document.getElementById("loading");
+
 var togglePlayPauseButton = document.getElementById("toggle-play-pause-button");
 var playPreviousSongButton = document.getElementById("play-previous-song-button");
 var playNextSongButton = document.getElementById("play-next-song-button");
 var showSongInfoButton = document.getElementById("show-song-info-button");
+
 var infoSpan = document.getElementById("info-span");
 
+var lastHue = 0;
 var player = null;
 var deviceId = null;
 var trackIndex = -1;
@@ -59,6 +62,8 @@ if (accessToken) {
 
             loading.style.display = "none";
             controlsDiv.style.display = "block";
+
+            playNextSong();
         });
 
         player.addListener("not_ready", function (response) { });
@@ -118,27 +123,27 @@ if (accessToken) {
 }
 
 window.onkeydown = function (e) {
-    if (e.key == "p" ||
-        e.code == "KeyP" ||
-        e.keyCode == 80
+    if (e.key == "p" || e.key == "ArrowUp" ||
+        e.code == "KeyP" || e.code == "ArrowUp" ||
+        e.keyCode == 80 || e.keyCode == 38
     ) {
         if (player) {
             togglePlayPause();
         }
     }
 
-    if (e.key == "Backspace" ||
-        e.code == "Backspace" ||
-        e.keyCode == 8
+    if (e.key == "Backspace" || e.key == "ArrowLeft" ||
+        e.code == "Backspace" || e.code == "ArrowLeft" ||
+        e.keyCode == 8 || e.keyCode == 37
     ) {
         if (player) {
             playPreviousSong();
         }
     }
 
-    if (e.key == " " ||
-        e.code == "Space" ||
-        e.keyCode == 32
+    if (e.key == " " || e.key == "ArrowRight" ||
+        e.code == "Space" || e.code == "ArrowRight" ||
+        e.keyCode == 32 || e.keyCode == 39
     ) {
         if (player) {
             playNextSong();
@@ -148,9 +153,9 @@ window.onkeydown = function (e) {
         }
     }
 
-    if (e.key == "Enter" ||
-        e.code == "Enter" ||
-        e.keyCode == 13
+    if (e.key == "Enter" || e.key == "ArrowDown" ||
+        e.code == "Enter" || e.code == "ArrowDown" ||
+        e.keyCode == 13 || e.keyCode == 40
     ) {
         if (player) {
             showSongInfo();
@@ -190,18 +195,24 @@ function playGame() {
 function togglePlayPause() {
     // player.togglePlay();
 
+    click(togglePlayPauseButton);
+
     if (paused) {
         player.resume().then(function () {
             paused = false;
+            togglePlayPauseButton.children[0].className = "icon-pause";
         });
     } else {
         player.pause().then(function () {
             paused = true;
+            togglePlayPauseButton.children[0].className = "icon-play";
         });
     }
 }
 
 function playNextSong() {
+    click(playNextSongButton);
+
     infoSpan.style.display = "none";
 
     if (trackIndex < songs.length - 1) {
@@ -209,10 +220,13 @@ function playNextSong() {
         playSong(songs[trackIndex].spotifyTrack);
         updatePlayButtons();
         paused = false;
+        togglePlayPauseButton.children[0].className = "icon-pause";
     }
 }
 
 function playPreviousSong() {
+    click(playPreviousSongButton);
+
     infoSpan.style.display = "none";
 
     if (trackIndex > 0) {
@@ -220,10 +234,13 @@ function playPreviousSong() {
         playSong(songs[trackIndex].spotifyTrack);
         updatePlayButtons();
         paused = false;
+        togglePlayPauseButton.children[0].className = "icon-pause";
     }
 }
 
 function showSongInfo() {
+    click(showSongInfoButton);
+
     if (trackIndex >= 0) {
         infoSpan.innerText = songs[trackIndex].artist + " - " + songs[trackIndex].name;
         infoSpan.style.display = "inline";
@@ -262,9 +279,18 @@ function updatePlayButtons() {
 }
 
 function changeBackgroundColor() {
-    var backgroundColor = "hsl(" + getRandomNumber(0, 360) + ", 100%, 95%)";
+    var hue = getRandomNumber(0, 360);
+
+    var from = lastHue <= 50 ? 0 : lastHue - 50;
+    var to = lastHue >= 310 ? 360 : lastHue + 50;
+    if (hue >= from && hue <= to) {
+        hue = hue <= 180 ? hue + 180 : hue - 180;
+    }
+
+    var backgroundColor = "hsl(" + hue + ", 100%, 95%)";
     pageContainer.style.backgroundColor = backgroundColor;
     document.getElementById("header").innerText = backgroundColor;
+    lastHue = hue;
 };
 
 function log(code) {
@@ -276,4 +302,20 @@ function log(code) {
 
 function getRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function click(button) {
+    button.style.webkitTransitionDuration = "0s"
+    button.style.mozTransitionDuration = "0s"
+    button.style.oTransitionDuration = "0s"
+    button.style.transitionDuration = "0s"
+    button.style.backgroundColor = "hsla(0, 100%, 100%, 1)";
+
+    setTimeout(function () {
+        button.style.removeProperty("background-color");
+        button.style.webkitTransitionDuration = "0.2s"
+        button.style.mozTransitionDuration = "0.2s"
+        button.style.oTransitionDuration = "0.2s"
+        button.style.transitionDuration = "0.2s"
+    }, 20);
 }

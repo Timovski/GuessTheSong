@@ -83,7 +83,6 @@ html, body {
 
 #page-container {
     height: 100%;
-    background-color: darkslategray;
     -webkit-transition-duration: 3s;
     -moz-transition-duration: 3s;
     -o-transition-duration: 3s;
@@ -110,14 +109,15 @@ html, body {
     width: 300px;
     height: 50px;
     margin-top: 20px;
-    border: 2px solid #4CAF50;
+    border: 2px solid #969696;
     border-radius: 4px;
     cursor: pointer;
     text-align: left;
-    -webkit-transition-duration: 0.4s;
-    -moz-transition-duration: 0.4s;
-    -o-transition-duration: 0.4s;
-    transition-duration: 0.4s;
+    user-select: none;
+    -webkit-transition-duration: 0.2s;
+    -moz-transition-duration: 0.2s;
+    -o-transition-duration: 0.2s;
+    transition-duration: 0.2s;
     -webkit-transition-timing-function: ease-out;
     -moz-transition-timing-function: ease-out;
     -o-transition-timing-function: ease-out;
@@ -127,10 +127,10 @@ html, body {
     .button [class^="icon-"], [class*=" icon-"] {
         font-size: 50px;
         margin-left: 2px;
-        -webkit-transition-duration: 0.2s;
-        -moz-transition-duration: 0.2s;
-        -o-transition-duration: 0.2s;
-        transition-duration: 0.2s;
+        -webkit-transition-duration: 0.1s;
+        -moz-transition-duration: 0.1s;
+        -o-transition-duration: 0.1s;
+        transition-duration: 0.1s;
         -webkit-transition-timing-function: ease-out;
         -moz-transition-timing-function: ease-out;
         -o-transition-timing-function: ease-out;
@@ -138,34 +138,59 @@ html, body {
     }
 
     .button.disabled {
-        background-color: darkgray;
+        background-color: rgba(200, 200, 200, 0.2);
+        border-color: rgba(200, 200, 200, 0.8);
         cursor: not-allowed;
     }
 
-#play-game-button:hover {
-    background-color: rgba(59, 155, 102, 1);
-    color: white;
+#play-game-button {
+    border-color: rgba(0, 175, 0, 0.6);
 }
 
-#toggle-play-pause-button:hover {
-    background-color: rgba(59, 155, 102, 1);
-    color: white;
+    #play-game-button:hover {
+        background-color: rgba(0, 255, 0, 0.2);
+        color: white;
+    }
+
+#toggle-play-pause-button {
+    background-color: rgba(255, 255, 0, 0.2);
+    border-color: rgba(215, 215, 0, 0.6);
 }
 
-#play-previous-song-button:not([class*="disabled"]):hover {
-    background-color: rgba(59, 155, 102, 1);
-    color: white;
+    #toggle-play-pause-button:hover {
+        background-color: rgba(255, 255, 0, 0.4);
+        color: white;
+    }
+
+#play-previous-song-button:not([class*="disabled"]) {
+    background-color: rgba(255, 0, 0, 0.2);
+    border-color: rgba(255, 0, 0, 0.4);
 }
 
-#play-next-song-button:not([class*="disabled"]):hover {
-    background-color: rgba(59, 155, 102, 1);
-    color: white;
+    #play-previous-song-button:not([class*="disabled"]):hover {
+        background-color: rgba(255, 0, 0, 0.4);
+        color: white;
+    }
+
+#play-next-song-button:not([class*="disabled"]) {
+    background-color: rgba(0, 255, 0, 0.2);
+    border-color: rgba(0, 255, 0, 0.6);
 }
 
-#show-song-info-button:hover {
-    background-color: rgba(59, 155, 102, 1);
-    color: white;
+    #play-next-song-button:not([class*="disabled"]):hover {
+        background-color: rgba(0, 255, 0, 0.3);
+        color: white;
+    }
+
+#show-song-info-button {
+    background-color: rgba(0, 0, 255, 0.2);
+    border-color: rgba(0, 0, 255, 0.2);
 }
+
+    #show-song-info-button:hover {
+        background-color: rgba(0, 0, 255, 0.4);
+        color: white;
+    }
 
 .play-button-text-container {
     display: inline-block;
