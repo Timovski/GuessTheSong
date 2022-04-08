@@ -17,7 +17,7 @@ var playPreviousSongButton = document.getElementById("play-previous-song-button"
 var playNextSongButton = document.getElementById("play-next-song-button");
 var showSongInfoButton = document.getElementById("show-song-info-button");
 
-var infoSpan = document.getElementById("info-span");
+var songInfo = document.getElementById("song-info");
 
 var lastHue = 0;
 var player = null;
@@ -201,11 +201,13 @@ function togglePlayPause() {
         player.resume().then(function () {
             paused = false;
             togglePlayPauseButton.children[0].className = "icon-pause";
+            togglePlayPauseButton.children[1].children[0].textContent = "Pause";
         });
     } else {
         player.pause().then(function () {
             paused = true;
             togglePlayPauseButton.children[0].className = "icon-play";
+            togglePlayPauseButton.children[1].children[0].textContent = "Play";
         });
     }
 }
@@ -213,21 +215,19 @@ function togglePlayPause() {
 function playNextSong() {
     click(playNextSongButton);
 
-    infoSpan.style.display = "none";
-
     if (trackIndex < songs.length - 1) {
         trackIndex++;
         playSong(songs[trackIndex].spotifyTrack);
         updatePlayButtons();
         paused = false;
         togglePlayPauseButton.children[0].className = "icon-pause";
+        togglePlayPauseButton.children[1].children[0].textContent = "Pause";
+        hideSongInfo();
     }
 }
 
 function playPreviousSong() {
     click(playPreviousSongButton);
-
-    infoSpan.style.display = "none";
 
     if (trackIndex > 0) {
         trackIndex--;
@@ -235,6 +235,8 @@ function playPreviousSong() {
         updatePlayButtons();
         paused = false;
         togglePlayPauseButton.children[0].className = "icon-pause";
+        togglePlayPauseButton.children[1].children[0].textContent = "Pause";
+        hideSongInfo();
     }
 }
 
@@ -242,9 +244,15 @@ function showSongInfo() {
     click(showSongInfoButton);
 
     if (trackIndex >= 0) {
-        infoSpan.innerText = songs[trackIndex].artist + " - " + songs[trackIndex].name;
-        infoSpan.style.display = "inline";
+        songInfo.innerText = songs[trackIndex].artist + " - " + songs[trackIndex].name;
+        songInfo.classList.remove("song-info-hidden");
+        songInfo.classList.add("song-info-visible");
     }
+}
+
+function hideSongInfo() {
+    songInfo.classList.remove("song-info-visible");
+    songInfo.classList.add("song-info-hidden");
 }
 
 function playSong(track) {
@@ -287,9 +295,8 @@ function changeBackgroundColor() {
         hue = hue <= 180 ? hue + 180 : hue - 180;
     }
 
-    var backgroundColor = "hsl(" + hue + ", 100%, 95%)";
+    var backgroundColor = "hsl(" + hue + ", 100%, 90%)";
     pageContainer.style.backgroundColor = backgroundColor;
-    document.getElementById("header").innerText = backgroundColor;
     lastHue = hue;
 };
 
@@ -305,17 +312,17 @@ function getRandomNumber(min, max) {
 }
 
 function click(button) {
-    button.style.webkitTransitionDuration = "0s"
-    button.style.mozTransitionDuration = "0s"
-    button.style.oTransitionDuration = "0s"
-    button.style.transitionDuration = "0s"
-    button.style.backgroundColor = "hsla(0, 100%, 100%, 1)";
+    button.style.webkitTransitionDuration = "0s";
+    button.style.mozTransitionDuration = "0s";
+    button.style.oTransitionDuration = "0s";
+    button.style.transitionDuration = "0s";
+    button.style.backgroundColor = "white";
 
     setTimeout(function () {
+        button.style.webkitTransitionDuration = "0.1s";
+        button.style.mozTransitionDuration = "0.1s";
+        button.style.oTransitionDuration = "0.1s";
+        button.style.transitionDuration = "0.1s";
         button.style.removeProperty("background-color");
-        button.style.webkitTransitionDuration = "0.2s"
-        button.style.mozTransitionDuration = "0.2s"
-        button.style.oTransitionDuration = "0.2s"
-        button.style.transitionDuration = "0.2s"
     }, 20);
 }
