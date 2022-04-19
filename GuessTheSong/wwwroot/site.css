@@ -67,6 +67,10 @@ body {
     font-family: "Trebuchet MS", Tahoma, Verdana, Arial, Helvetica, sans-serif;
 }
 
+td {
+    vertical-align: top;
+}
+
 .header h1 {
     font-size: 3.5em;
     padding-left: 10px;
@@ -101,9 +105,11 @@ body {
 }
 
 #welcome-container,
+#welcome-more-info-container,
+#spotify-premium-info-container,
+#loading-container,
 #controls-container {
     display: none;
-    height: 100%;
 }
 
 .info-container {

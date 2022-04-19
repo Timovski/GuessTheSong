@@ -44,7 +44,7 @@ if (accessToken) {
 
     window.history.replaceState(null, null, window.location.pathname);
 
-    loadingContainer.style.display = "block";
+    loadingContainer.style.display = "table-cell";
     changeBackgroundColor();
 
     window.onSpotifyWebPlaybackSDKReady = function () {
@@ -58,7 +58,7 @@ if (accessToken) {
             deviceId = response.device_id;
 
             loadingContainer.style.display = "none";
-            controlsContainer.style.display = "block";
+            controlsContainer.style.display = "table-cell";
 
             playNextSong();
         });
@@ -115,7 +115,7 @@ if (accessToken) {
         player.connect();
     };
 } else {
-    welcomeContainer.style.display = "block";
+    welcomeContainer.style.display = "table-cell";
 }
 
 window.onkeydown = function (e) {
