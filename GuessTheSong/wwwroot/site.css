@@ -54,8 +54,8 @@
 /*#endregion Font*/
 
 * {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
 }
 
 html, body {
@@ -63,22 +63,27 @@ html, body {
 }
 
 body {
+    font-size: 100%;
     font-family: "Trebuchet MS", Tahoma, Verdana, Arial, Helvetica, sans-serif;
 }
 
-.header {
-    height: 10%;
+.header h1 {
+    font-size: 3.5em;
+    padding-left: 10px;
 }
 
 .content {
-    height: 80%;
     text-align: center;
 }
 
 .footer {
-    height: 10%;
     text-align: center;
 }
+
+    .footer td {
+        font-size: 1.2em;
+        padding-bottom: 10px;
+    }
 
     .footer a {
         text-decoration: none;
@@ -87,18 +92,28 @@ body {
 
 #page-container {
     height: 100%;
+    width: 100%;
+    border-collapse: collapse;
     -webkit-transition-duration: 3s;
     -moz-transition-duration: 3s;
     -o-transition-duration: 3s;
     transition-duration: 3s;
 }
 
+#welcome-container,
+#controls-container {
+    display: none;
+    height: 100%;
+}
+
 .info-container {
     width: 80%;
     display: inline-block;
     text-align: left;
+    font-size: 1.2em;
 }
 
+#welcome-info-container,
 #spotify-premium-info-container {
     margin-top: 20px;
 }
@@ -110,8 +125,7 @@ body {
 
 .button {
     display: inline-block;
-    width: 332px;
-    height: 50px;
+    width: 66%;
     margin-top: 20px;
     border: 2px dashed black;
     border-radius: 4px;
@@ -148,51 +162,57 @@ body {
     }
 
 #play-game-button:hover {
-    background-color: #39ac39;
-    color: white;
-    border: 2px solid white;
+    animation: rainbow 10s linear;
+    animation-iteration-count: infinite;
 }
 
 #toggle-play-pause-button {
     background-color: #ffff80;
-    border: 2px dashed black;
 }
 
     #toggle-play-pause-button:hover {
         background-color: #dede00;
-        color: white;
-        border: 2px solid white;
     }
 
 #play-previous-song-button:not([class*="disabled"]) {
     background-color: #ff9999;
-    border: 2px dashed black;
 }
 
     #play-previous-song-button:not([class*="disabled"]):hover {
         background-color: #ff5050;
-        color: white;
-        border: 2px solid white;
     }
 
-#play-next-song-button:not([class*="disabled"]) {
-    background-color: #9fdf9f;
-    border: 2px dashed black;
+#play-next-song-button {
+    height: 33%;
 }
 
-    #play-next-song-button:not([class*="disabled"]):hover {
-        background-color: #39ac39;
-        color: white;
-        border: 2px solid white;
+    #play-next-song-button:not([class*="disabled"]) {
+        background-color: #9fdf9f;
     }
+
+        #play-next-song-button:not([class*="disabled"]):hover {
+            background-color: #40bf40;
+        }
 
 #show-song-info-button {
     background-color: #80ccff;
-    border: 2px dashed black;
 }
 
     #show-song-info-button:hover {
         background-color: #008ae6;
+    }
+
+#toggle-play-pause-button,
+#play-previous-song-button:not([class*="disabled"]),
+#play-next-song-button:not([class*="disabled"]),
+#show-song-info-button {
+    border: 2px dashed black;
+}
+
+    #toggle-play-pause-button:hover,
+    #play-previous-song-button:not([class*="disabled"]):hover,
+    #play-next-song-button:not([class*="disabled"]):hover,
+    #show-song-info-button:hover {
         color: white;
         border: 2px solid white;
     }
@@ -203,17 +223,17 @@ body {
 }
 
 .button-main-text {
-    font-size: 29px;
+    font-size: 2em;
     text-align: left;
     line-height: 28px;
 }
 
 .button-info-text {
-    font-size: 12px;
+    font-size: 1em;
 }
 
 #song-info {
-    font-size: 22px;
+    font-size: 1.6em;
 }
 
 .song-info-hidden {
@@ -232,4 +252,59 @@ body {
     -moz-transition-duration: 1s;
     -o-transition-duration: 1s;
     transition-duration: 1s;
+}
+
+.rainbow {
+    animation: rainbow 10s linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes rainbow {
+    100%, 0% {
+        background-color: rgba(0, 255, 255, 0.0); /* 7 */
+    }
+
+    8% {
+        background-color: rgba(0, 127, 255, 0.1); /* 8 */
+    }
+
+    16% {
+        background-color: rgba(0, 0, 255, 0.2); /* 9 */
+    }
+
+    25% {
+        background-color: rgba(127, 0, 255, 0.2); /* 10 */
+    }
+
+    33% {
+        background-color: rgba(255, 0, 255, 0.2); /* 11 */
+    }
+
+    41% {
+        background-color: rgba(255, 0, 127, 0.2); /* 12 */
+    }
+
+    50% {
+        background-color: rgba(255, 0, 0, 0.2); /* 1 */
+    }
+
+    58% {
+        background-color: rgba(255, 127, 0, 0.2); /* 2 */
+    }
+
+    66% {
+        background-color: rgba(255, 255, 0, 0.2); /* 3 */
+    }
+
+    75% {
+        background-color: rgba(127, 255, 0, 0.2); /* 4 */
+    }
+
+    83% {
+        background-color: rgba(0, 255, 0, 0.2); /* 5 */
+    }
+
+    91% {
+        background-color: rgba(0, 255, 127, 0.2); /* 6 */
+    }
 }

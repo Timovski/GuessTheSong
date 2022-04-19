@@ -1,3 +1,8 @@
+# User-specific files
+*.user
+
+.config/
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
@@ -15,6 +20,9 @@ bld/
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
+
+# Publish Web Output
+*.pubxml
 
 # Settings
 launchSettings.json

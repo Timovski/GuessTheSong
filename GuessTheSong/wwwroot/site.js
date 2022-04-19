@@ -9,8 +9,8 @@ var welcomeMoreInfoContainer = document.getElementById("welcome-more-info-contai
 var spotifyPremiumInfoLink = document.getElementById("spotify-premium-info-link");
 var spotifyPremiumInfoContainer = document.getElementById("spotify-premium-info-container");
 
-var controlsDiv = document.getElementById("controls-div");
-var loading = document.getElementById("loading");
+var loadingContainer = document.getElementById("loading-container");
+var controlsContainer = document.getElementById("controls-container");
 
 var togglePlayPauseButton = document.getElementById("toggle-play-pause-button");
 var playPreviousSongButton = document.getElementById("play-previous-song-button");
@@ -27,13 +27,11 @@ var paused = false;
 var lastAutoStart = new Date();
 
 welcomeMoreInfoLink.onclick = function () {
-    //welcomeMoreInfoLink.parentElement.removeChild(welcomeMoreInfoLink);
     welcomeMoreInfoContainer.style.display = "inline-block";
 };
 
 spotifyPremiumInfoLink.onclick = function (event) {
     event.stopPropagation();
-    //spotifyPremiumInfoLink.parentElement.removeChild(spotifyPremiumInfoLink);
     spotifyPremiumInfoContainer.style.display = "inline-block";
 };
 
@@ -46,9 +44,8 @@ if (accessToken) {
 
     window.history.replaceState(null, null, window.location.pathname);
 
-    loading.style.display = "block";
+    loadingContainer.style.display = "block";
     changeBackgroundColor();
-    //playGameButton.style.display = "none";
 
     window.onSpotifyWebPlaybackSDKReady = function () {
         player = new Spotify.Player({
@@ -60,8 +57,8 @@ if (accessToken) {
         player.addListener("ready", function (response) {
             deviceId = response.device_id;
 
-            loading.style.display = "none";
-            controlsDiv.style.display = "block";
+            loadingContainer.style.display = "none";
+            controlsContainer.style.display = "block";
 
             playNextSong();
         });
@@ -118,7 +115,6 @@ if (accessToken) {
         player.connect();
     };
 } else {
-    //playGameButton.style.display = "inline-block";
     welcomeContainer.style.display = "block";
 }
 
@@ -188,7 +184,6 @@ function playGame() {
         state: state
     });
 
-    //playGameButton.style.display = "none";
     window.location.href = authUri + authQueryParameters.toString();
 }
 
@@ -295,7 +290,7 @@ function changeBackgroundColor() {
         hue = hue <= 180 ? hue + 180 : hue - 180;
     }
 
-    var backgroundColor = "hsl(" + hue + ", 100%, 90%)";
+    var backgroundColor = "hsl(" + hue + ", 100%, 80%)";
     pageContainer.style.backgroundColor = backgroundColor;
     lastHue = hue;
 };

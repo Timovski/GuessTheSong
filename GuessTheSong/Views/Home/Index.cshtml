@@ -12,103 +12,115 @@
     <link rel="stylesheet" type="text/css" href="~/site.css" />
 </head>
 <body>
-    <div id="page-container">
-        <div class="header">
-            <h1 id="header"> Guess The Song</h1>
-        </div>
-        <div class="content">
-            <div id="welcome-container" style="display: none;">
-                <p id="welcome-info-container" class="info-container">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor <span id="welcome-more-info-link" class="link">More info...</span>
-                </p>
-                <p id="welcome-more-info-container" class="info-container" style="display: none;">
-                    Incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </p>
-                <br>
-                <div id="play-game-button" class="button">
-                    <span class="icon-play"></span>
-                    <div class="button-text-container">
-                        <div class="button-main-text">
-                            PLAY
+    <table id="page-container">
+        <thead class="header">
+            <tr>
+                <td>
+                    <h1>Guess The Song</h1>
+                </td>
+            </tr>
+        </thead>
+        <tbody class="content">
+            <tr>
+                <td>
+                    <div id="welcome-container">
+                        <p id="welcome-info-container" class="info-container">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor <span id="welcome-more-info-link" class="link">More info...</span>
+                        </p>
+                        <p id="welcome-more-info-container" class="info-container" style="display: none;">
+                            Incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </p>
+                        <br>
+                        <div id="play-game-button" class="button">
+                            <span class="icon-play"></span>
+                            <div class="button-text-container">
+                                <div class="button-main-text">
+                                    PLAY
+                                </div>
+                                <div class="button-info-text">
+                                    (Spotify premium account required. <span id="spotify-premium-info-link" class="link">More info...</span>)
+                                </div>
+                            </div>
                         </div>
-                        <div class="button-info-text">
-                            (Spotify premium account required. <span id="spotify-premium-info-link" class="link">More info...</span>)
-                        </div>
+                        <br>
+                        <p id="spotify-premium-info-container" class="info-container" style="display: none;">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </p>
                     </div>
-                </div>
-                <br>
-                <p id="spotify-premium-info-container" class="info-container" style="display: none;">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </p>
-            </div>
-            <div>
-                <h1 id="loading" style="display: none;">Loading...</h1>
-            </div>
-            <div id="controls-div" style="display: none;">
-                <div id="toggle-play-pause-button" class="button">
-                    <span class="icon-pause"></span>
-                    <div class="button-text-container">
-                        <div class="button-main-text">
-                            Pause
-                        </div>
-                        <div class="button-info-text">
-                            (p, &uarr;)
-                        </div>
+                    <div>
+                        <h1 id="loading-container" style="display: none;">Loading...</h1>
                     </div>
-                </div>
-                <br>
-                <div id="play-previous-song-button" class="button">
-                    <span class="icon-previous"></span>
-                    <div class="button-text-container">
-                        <div class="button-main-text">
-                            Play Previous Song
+                    <div id="controls-container">
+                        <div id="toggle-play-pause-button" class="button">
+                            <span class="icon-pause"></span>
+                            <div class="button-text-container">
+                                <div class="button-main-text">
+                                    Pause
+                                </div>
+                                <div class="button-info-text">
+                                    (p, &uarr;)
+                                </div>
+                            </div>
                         </div>
-                        <div class="button-info-text">
-                            (backspace, &larr;)
+                        <br>
+                        <div id="play-previous-song-button" class="button">
+                            <span class="icon-previous"></span>
+                            <div class="button-text-container">
+                                <div class="button-main-text">
+                                    Previous Song
+                                </div>
+                                <div class="button-info-text">
+                                    (backspace, &larr;)
+                                </div>
+                            </div>
                         </div>
+                        <br>
+                        <div id="play-next-song-button" class="button">
+                            <span class="icon-next"></span>
+                            <div class="button-text-container">
+                                <div class="button-main-text">
+                                    Next Song
+                                </div>
+                                <div class="button-info-text">
+                                    (space, &rarr;)
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div id="show-song-info-button" class="button">
+                            <span class="icon-info"></span>
+                            <div class="button-text-container">
+                                <div class="button-main-text">
+                                    Show Info
+                                </div>
+                                <div class="button-info-text">
+                                    (enter, &darr;)
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div id="song-info" class="song-info-hidden"></div>
                     </div>
-                </div>
-                <br>
-                <div id="play-next-song-button" class="button">
-                    <span class="icon-next"></span>
-                    <div class="button-text-container">
-                        <div class="button-main-text">
-                            Play Next Song
-                        </div>
-                        <div class="button-info-text">
-                            (space, &rarr;)
-                        </div>
-                    </div>
-                </div>
-                <br>
-                <div id="show-song-info-button" class="button">
-                    <span class="icon-info"></span>
-                    <div class="button-text-container">
-                        <div class="button-main-text">
-                            Show Info
-                        </div>
-                        <div class="button-info-text">
-                            (enter, &darr;)
-                        </div>
-                    </div>
-                </div>
-                <br>
-                <div id="song-info" class="song-info-hidden"></div>
-            </div>
-        </div>
-        <div class="footer">
-            Powered by:
-            <a href="https://www.spotify.com/" target="_blank" rel="noopener">
-                <span class="link">Spotify</span>
-                <span class="icon-spotify"></span>
-            </a>
-            |
-            <a href="https://github.com/Timovski/GuessTheSong" target="_blank" rel="noopener">
-                <span class="link">GitHub</span>
-                <span class="icon-github"></span>
-            </a>
-        </div>
-    </div>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot class="footer">
+            <tr>
+                <td>
+                    Powered by:
+                    <a href="https://www.spotify.com/" target="_blank" rel="noopener">
+                        <span class="link">Spotify</span>
+                        <span class="icon-spotify"></span>
+                    </a>
+                    |
+                    <a href="https://github.com/Timovski/GuessTheSong" target="_blank" rel="noopener">
+                        <span class="link">GitHub</span>
+                        <span class="icon-github"></span>
+                    </a>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
     <script>
         var clientId = "@Model.ClientId";
         var redirectUri = "@Model.RedirectUri";
