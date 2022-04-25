@@ -19,6 +19,11 @@ var showSongInfoButton = document.getElementById("show-song-info-button");
 
 var songInfo = document.getElementById("song-info");
 
+var touchstartX = 0;
+var touchendX = 0;
+var touchstartY = 0;
+var touchendY = 0;
+
 var lastHue = 0;
 var player = null;
 var deviceId = null;
@@ -159,6 +164,50 @@ window.onkeydown = function (e) {
         else {
             playGame();
         }
+    }
+};
+
+window.ontouchstart = function (e) {
+    touchstartX = e.changedTouches[0].screenX;
+    touchstartY = e.changedTouches[0].screenY;
+};
+
+window.ontouchend = function (e) {
+    touchendX = e.changedTouches[0].screenX;
+    touchendY = e.changedTouches[0].screenY;
+
+    if (touchendX > touchstartX + 100) {
+        if (player) {
+            playNextSong();
+        }
+        else {
+            playGame();
+        }
+        return;
+    }
+
+    if (touchendY > touchstartY + 100) {
+        if (player) {
+            showSongInfo();
+        }
+        else {
+            playGame();
+        }
+        return;
+    }
+
+    if (touchendX < touchstartX - 100) {
+        if (player) {
+            playPreviousSong();
+        }
+        return;
+    }
+
+    if (touchendY < touchstartY - 100) {
+        if (player) {
+            togglePlayPause();
+        }
+        return;
     }
 };
 
