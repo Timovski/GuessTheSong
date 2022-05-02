@@ -190,7 +190,7 @@ td {
     }
 
 #play-next-song-button {
-    height: 33%;
+    height: 230px;
 }
 
     #play-next-song-button:not([class*="disabled"]) {

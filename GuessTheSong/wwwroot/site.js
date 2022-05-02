@@ -71,15 +71,13 @@ if (accessToken) {
         player.addListener("not_ready", function (response) { });
 
         player.addListener("initialization_error", function (response) {
-            console.error(response.message);
         });
 
         player.addListener("authentication_error", function (response) {
-            console.error(response.message);
         });
 
         player.addListener("account_error", function (response) {
-            console.error(response.message);
+            loadingContainer.children[0].textContent = "Account error: " + response.message;
         });
 
         player.addListener("player_state_changed", function (state) {
