@@ -221,7 +221,7 @@ function playGame() {
         return text;
     };
 
-    var scope = "streaming user-read-email user-read-private";
+    var scope = "streaming";
     var state = generateRandomString(16);
 
     var authQueryParameters = new URLSearchParams({
