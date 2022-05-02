@@ -20,9 +20,9 @@
                 </td>
             </tr>
         </thead>
-        <tbody class="content">
+        <tbody id="welcome-container">
             <tr>
-                <td id="welcome-container">
+                <td>
                     <p id="welcome-info-container" class="info-container">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor <span id="welcome-more-info-link" class="link">More info...</span>
                     </p>
@@ -46,10 +46,18 @@
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                     </p>
                 </td>
-                <td id="loading-container">
-                    <h1>Loading...</h1>
+            </tr>
+        </tbody>
+        <tbody id="loading-container">
+            <tr>
+                <td>
+                    <h1 id="loading-text">Loading...</h1>
                 </td>
-                <td id="controls-container">
+            </tr>
+        </tbody>
+        <tbody id="controls-container">
+            <tr>
+                <td>
                     <div id="toggle-play-pause-button" class="button">
                         <span class="icon-pause"></span>
                         <div class="button-text-container">
@@ -61,7 +69,10 @@
                             </div>
                         </div>
                     </div>
-                    <br>
+                </td>
+            </tr>
+            <tr>
+                <td>
                     <div id="play-previous-song-button" class="button">
                         <span class="icon-previous"></span>
                         <div class="button-text-container">
@@ -73,7 +84,11 @@
                             </div>
                         </div>
                     </div>
-                    <br>
+
+                </td>
+            </tr>
+            <tr id="play-next-song-row">
+                <td>
                     <div id="play-next-song-button" class="button">
                         <span class="icon-next"></span>
                         <div class="button-text-container">
@@ -85,7 +100,11 @@
                             </div>
                         </div>
                     </div>
-                    <br>
+
+                </td>
+            </tr>
+            <tr>
+                <td>
                     <div id="show-song-info-button" class="button">
                         <span class="icon-info"></span>
                         <div class="button-text-container">
@@ -97,8 +116,12 @@
                             </div>
                         </div>
                     </div>
-                    <br>
-                    <div id="song-info" class="song-info-hidden"> </div>
+
+                </td>
+            </tr>
+            <tr id="song-info-row">
+                <td>
+                    <div id="song-info" class="song-info-hidden"></div>
                 </td>
             </tr>
         </tbody>

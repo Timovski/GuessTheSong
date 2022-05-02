@@ -10,6 +10,7 @@ var spotifyPremiumInfoLink = document.getElementById("spotify-premium-info-link"
 var spotifyPremiumInfoContainer = document.getElementById("spotify-premium-info-container");
 
 var loadingContainer = document.getElementById("loading-container");
+var loadingText = document.getElementById("loading-text");
 var controlsContainer = document.getElementById("controls-container");
 
 var togglePlayPauseButton = document.getElementById("toggle-play-pause-button");
@@ -49,7 +50,7 @@ if (accessToken) {
 
     window.history.replaceState(null, null, window.location.pathname);
 
-    loadingContainer.style.display = "table-cell";
+    loadingContainer.style.display = "table-row-group";
     changeBackgroundColor();
 
     window.onSpotifyWebPlaybackSDKReady = function () {
@@ -63,21 +64,19 @@ if (accessToken) {
             deviceId = response.device_id;
 
             loadingContainer.style.display = "none";
-            controlsContainer.style.display = "table-cell";
+            controlsContainer.style.display = "table-row-group";
 
             playNextSong();
         });
 
         player.addListener("not_ready", function (response) { });
 
-        player.addListener("initialization_error", function (response) {
-        });
+        player.addListener("initialization_error", function (response) { });
 
-        player.addListener("authentication_error", function (response) {
-        });
+        player.addListener("authentication_error", function (response) { });
 
         player.addListener("account_error", function (response) {
-            loadingContainer.children[0].textContent = "Account error: " + response.message;
+            loadingText.textContent = "Account error: " + response.message;
         });
 
         player.addListener("player_state_changed", function (state) {
@@ -118,7 +117,7 @@ if (accessToken) {
         player.connect();
     };
 } else {
-    welcomeContainer.style.display = "table-cell";
+    welcomeContainer.style.display = "table-row-group";
 }
 
 window.onkeydown = function (e) {

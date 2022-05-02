@@ -67,8 +67,8 @@ body {
     font-family: "Trebuchet MS", Tahoma, Verdana, Arial, Helvetica, sans-serif;
 }
 
-td {
-    vertical-align: top;
+tbody {
+    text-align: center;
 }
 
 .header h1 {
@@ -76,8 +76,27 @@ td {
     padding-left: 10px;
 }
 
-.content {
-    text-align: center;
+#welcome-container td,
+#loading-container td {
+    vertical-align: top;
+}
+
+#controls-container tr {
+    height: 15%;
+}
+
+#play-next-song-row {
+    height: 40% !important;
+}
+
+#controls-container td {
+    vertical-align: middle;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#song-info-row td {
+    vertical-align: top;
 }
 
 .footer {
@@ -120,6 +139,7 @@ td {
 }
 
 #welcome-info-container,
+#play-game-button,
 #spotify-premium-info-container {
     margin-top: 20px;
 }
@@ -132,7 +152,6 @@ td {
 .button {
     display: inline-block;
     width: 66%;
-    margin-top: 20px;
     padding-bottom: 1px;
     border: 2px dashed black;
     border-radius: 4px;
@@ -190,7 +209,7 @@ td {
     }
 
 #play-next-song-button {
-    height: 230px;
+    height: 100%;
 }
 
     #play-next-song-button:not([class*="disabled"]) {
@@ -243,7 +262,7 @@ td {
 }
 
 .song-info-hidden {
-    margin-top: 0;
+    margin-top: -15px;
     color: rgba(0, 0, 0, 0);
     -webkit-transition-duration: 0.5s;
     -moz-transition-duration: 0.5s;
@@ -252,7 +271,7 @@ td {
 }
 
 .song-info-visible {
-    margin-top: 15px;
+    margin-top: 0;
     color: rgba(0, 0, 0, 1);
     -webkit-transition-duration: 1s;
     -moz-transition-duration: 1s;
