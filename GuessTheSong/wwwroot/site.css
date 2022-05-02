@@ -67,6 +67,16 @@ body {
     font-family: "Trebuchet MS", Tahoma, Verdana, Arial, Helvetica, sans-serif;
 }
 
+ol {
+    padding-left: 40px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+    ol li ol li {
+        list-style-type: disc;
+    }
+
 tbody {
     text-align: center;
 }
@@ -125,6 +135,7 @@ tbody {
 
 #welcome-container,
 #welcome-more-info-container,
+#welcome-more-info-container-paragraph,
 #spotify-premium-info-container,
 #loading-container,
 #controls-container {
@@ -133,12 +144,12 @@ tbody {
 
 .info-container {
     width: 80%;
+    margin-top: 10px;
     display: inline-block;
     text-align: left;
     font-size: 1.2em;
 }
 
-#welcome-info-container,
 #play-game-button,
 #spotify-premium-info-container {
     margin-top: 20px;

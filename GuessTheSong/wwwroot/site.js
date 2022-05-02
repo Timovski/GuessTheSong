@@ -2,9 +2,9 @@
 var welcomeContainer = document.getElementById("welcome-container");
 var playGameButton = document.getElementById("play-game-button");
 
-var welcomeInfoContainer = document.getElementById("welcome-info-container");
 var welcomeMoreInfoLink = document.getElementById("welcome-more-info-link");
 var welcomeMoreInfoContainer = document.getElementById("welcome-more-info-container");
+var welcomeMoreInfoContainerParagraph = document.getElementById("welcome-more-info-container-paragraph");
 
 var spotifyPremiumInfoLink = document.getElementById("spotify-premium-info-link");
 var spotifyPremiumInfoContainer = document.getElementById("spotify-premium-info-container");
@@ -33,7 +33,9 @@ var paused = false;
 var lastAutoStart = new Date();
 
 welcomeMoreInfoLink.onclick = function () {
-    welcomeMoreInfoContainer.style.display = "inline-block";
+    welcomeMoreInfoLink.style.display = "none";
+    welcomeMoreInfoContainer.style.display = "inline";
+    welcomeMoreInfoContainerParagraph.style.display = "inline-block";
 };
 
 spotifyPremiumInfoLink.onclick = function (event) {

@@ -24,10 +24,14 @@
             <tr>
                 <td>
                     <p id="welcome-info-container" class="info-container">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor <span id="welcome-more-info-link" class="link">More info...</span>
+                        A super simple song guessing game to play with your friends. The game is primarily targeted at millennials but anyone is welcome to play. The playlist mostly consists of party-pop songs from the 90s and 00s that you may or may not heard in a while or remember anymore. Basically, it's just a music player with the song info hidden, so it's your job is to correctly guess the artist and the song.
                     </p>
-                    <p id="welcome-more-info-container" class="info-container">
-                        Incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    <p class="info-container">
+                        The way to score and track points is totally up to you. But generally, the first one to guess the song gets a point, and then you move on to the next song. Aside from that you can determine the details of scoring yourselves. <span id="welcome-more-info-link" class="link">More info...</span>
+                        <span id="welcome-more-info-container">Maybe half a point is awarded if someone just knows the artist or just the name of the song. Or if a person just guesses the artist and another person guesses the song title before you change the song maybe award half a point each.</span>
+                    </p>
+                    <p id="welcome-more-info-container-paragraph" class="info-container">
+                        The idea is to have fun with your friends just guessing songs. Besides it's usually pretty clear early in the game who knows his songs and who doesn't, so a precise score tracking is not really necessary. Just have some nostalgic fun listening so songs that you've probably haven't heard in a while and may forgotten about.
                     </p>
                     <br>
                     <div id="play-game-button" class="button">
@@ -42,9 +46,37 @@
                         </div>
                     </div>
                     <br>
-                    <p id="spotify-premium-info-container" class="info-container">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </p>
+                    <div id="spotify-premium-info-container" class="info-container">
+                        Since Spotify is used to play the songs in this game, you'll need a Spotify premium account in order to play. Only one person is required to log in. If you're logged in to your Spotify premium account the game will automatically start once you click the Play button. If not then you can either:
+                        <ol>
+                            <li>
+                                Log in on the next page (the Play button will redirect you to the Spotify login page). After logging in, you'll automatically be redirected to Guess the Song and the game will start.
+                            </li>
+                            <li>
+                                Open a new tab in your browser, go to spotify.com and log in there. After that just return to this tab and click Play.
+                            </li>
+                        </ol>
+                        If this is your first time playing, when you log in, Spotify will ask you if you agree that Guess the Song will be able to:
+                        <ol>
+                            <li>
+                                View your Spotify account data (email, type of Spotify subscription you have, account country, name, username, your profile picture, etc...)
+                                <ol>
+                                    <li>
+                                        This application doesn't really care about that information and it's never read or stored in any way. It is requested from Spotify (and Spotify asks you if you'll grant that information to the application) only because it says that it has to be requested in order for the web player to work. This is stated in the web playback SDK guide in the Request User Authorization section, the part about scope. You can read more about it <a href="https://developer.spotify.com/documentation/web-playback-sdk/guide/#request-user-authorization" target="_blank" rel="noopener">here</a>.
+                                    </li>
+                                </ol>
+                            </li>
+                            <li>
+                                Take actions in Spotify on your behalf (stream and control Spotify on your other devices)
+                                <ol>
+                                    <li>
+                                        This is actually required in order for the game to work. You can only stream music from one device with your Spotify premium account. So, when the game starts, if you were listening to music on your computer or mobile device, the music will stop there and start here. At any time, you can return control to your devices and resume listening on any device but with that the game will stop working because you removed the control for playing music from the game and assigned it to another device.
+                                    </li>
+                                </ol>
+                            </li>
+                        </ol>
+                        And as it says on the page... You can remove this access at any time at spotify.com/account.
+                    </div>
                 </td>
             </tr>
         </tbody>
