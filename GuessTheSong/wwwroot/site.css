@@ -333,3 +333,13 @@ tbody {
         background-color: rgba(0, 255, 127, 0.2); /* 6 */
     }
 }
+
+@supports (-moz-appearance:none) {
+    thead td, tfoot td {
+        height: 1%;
+    }
+
+    tbody {
+        height: 80%;
+    }
+}
