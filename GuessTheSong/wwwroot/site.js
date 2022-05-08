@@ -305,6 +305,12 @@ function playSong(track) {
     xhr.onerror = function (err) { };
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) { }
+
+        if (xhr.readyState === 4 && xhr.status === 403) {
+            songs.splice(trackIndex, 1);
+            trackIndex--;
+            playNextSong();
+        }
     };
 
     xhr.open("PUT", playUri + deviceId, true);
