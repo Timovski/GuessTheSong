@@ -66,10 +66,10 @@
                         If this is your first time playing, when you log in, Spotify will ask you if you agree that Guess the Song will be able to:
                         <ol>
                             <li>
-                                View your Spotify account data (name, username, profile picture, how many followers you have on Spotify and your public playlists)
+                                View your Spotify account data (email, type of Spotify subscription you have, account country, name, username, your profile picture, etc...)
                                 <ol>
                                     <li>
-                                        This application doesn't really care about that information and it's never read or stored in any way. The only access this game requires is the streaming access explained bellow.
+                                        This application doesn't really care about that information and it's never read or stored in any way. It is requested from Spotify (and Spotify asks you if you'll grant that information to the application) only because it says that it has to be requested in order for the web player to work. This is stated in the web playback SDK guide in the Request User Authorization section, the part about scope. You can read more about it <a href="https://developer.spotify.com/documentation/web-playback-sdk/guide/#request-user-authorization" target="_blank" rel="noopener">here</a>.
                                     </li>
                                 </ol>
                             </li>
