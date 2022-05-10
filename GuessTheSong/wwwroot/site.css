@@ -86,8 +86,8 @@ tbody {
     padding-left: 10px;
 }
 
-#welcome-container td,
-#loading-container td {
+#empty-container td,
+#welcome-container td {
     vertical-align: top;
 }
 
@@ -137,7 +137,6 @@ tbody {
 #welcome-more-info-container,
 #welcome-more-info-container-paragraph,
 #spotify-premium-info-container,
-#loading-container,
 #controls-container {
     display: none;
 }

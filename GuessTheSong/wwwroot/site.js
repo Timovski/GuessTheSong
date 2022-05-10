@@ -1,4 +1,4 @@
-﻿var pageContainer = document.getElementById("page-container");
+var pageContainer = document.getElementById("page-container");
 var welcomeContainer = document.getElementById("welcome-container");
 var playGameButton = document.getElementById("play-game-button");
 
@@ -9,8 +9,7 @@ var welcomeMoreInfoContainerParagraph = document.getElementById("welcome-more-in
 var spotifyPremiumInfoLink = document.getElementById("spotify-premium-info-link");
 var spotifyPremiumInfoContainer = document.getElementById("spotify-premium-info-container");
 
-var loadingContainer = document.getElementById("loading-container");
-var loadingText = document.getElementById("loading-text");
+var emptyContainer = document.getElementById("empty-container");
 var controlsContainer = document.getElementById("controls-container");
 
 var togglePlayPauseButton = document.getElementById("toggle-play-pause-button");
@@ -29,7 +28,6 @@ var lastHue = 0;
 var player = null;
 var deviceId = null;
 var trackIndex = -1;
-var paused = false;
 var lastAutoStart = new Date();
 
 welcomeMoreInfoLink.onclick = function () {
@@ -52,7 +50,8 @@ if (accessToken) {
 
     window.history.replaceState(null, null, window.location.pathname);
 
-    loadingContainer.style.display = "table-row-group";
+    emptyContainer.style.display = "table-row-group";
+    emptyContainer.children[0].children[0].children[0].textContent = "Loading...";
     changeBackgroundColor();
 
     window.onSpotifyWebPlaybackSDKReady = function () {
@@ -65,7 +64,7 @@ if (accessToken) {
         player.addListener("ready", function (response) {
             deviceId = response.device_id;
 
-            loadingContainer.style.display = "none";
+            emptyContainer.style.display = "none";
             controlsContainer.style.display = "table-row-group";
 
             playNextSong();
@@ -78,7 +77,7 @@ if (accessToken) {
         player.addListener("authentication_error", function (response) { });
 
         player.addListener("account_error", function (response) {
-            loadingText.textContent = "Account error: " + response.message;
+            emptyContainer.children[0].children[0].children[0].textContent = "Account error: " + response.message;
         });
 
         player.addListener("player_state_changed", function (state) {
@@ -86,11 +85,12 @@ if (accessToken) {
                 return;
             }
 
+            updatePlayPauseButton(state.paused);
+
             var lastStart = new Date(lastAutoStart.getTime());
             lastStart.setSeconds(lastStart.getSeconds() + 20);
 
-            if (!paused &&
-                !state.loading &&
+            if (!state.loading &&
                 state.paused &&
                 state.track_window.previous_tracks[0] &&
                 state.track_window.previous_tracks[0].id === state.track_window.current_track.id &&
@@ -119,6 +119,7 @@ if (accessToken) {
         player.connect();
     };
 } else {
+    emptyContainer.style.display = "none";
     welcomeContainer.style.display = "table-row-group";
 }
 
@@ -236,22 +237,17 @@ function playGame() {
 }
 
 function togglePlayPause() {
-    // player.togglePlay();
-
+    player.togglePlay();
     click(togglePlayPauseButton);
+}
 
+function updatePlayPauseButton(paused) {
     if (paused) {
-        player.resume().then(function () {
-            paused = false;
-            togglePlayPauseButton.children[0].className = "icon-pause";
-            togglePlayPauseButton.children[1].children[0].textContent = "Pause";
-        });
+        togglePlayPauseButton.children[0].className = "icon-play";
+        togglePlayPauseButton.children[1].children[0].textContent = "Play";
     } else {
-        player.pause().then(function () {
-            paused = true;
-            togglePlayPauseButton.children[0].className = "icon-play";
-            togglePlayPauseButton.children[1].children[0].textContent = "Play";
-        });
+        togglePlayPauseButton.children[0].className = "icon-pause";
+        togglePlayPauseButton.children[1].children[0].textContent = "Pause";
     }
 }
 
@@ -262,9 +258,6 @@ function playNextSong() {
         trackIndex++;
         playSong(songs[trackIndex].spotifyTrack);
         updatePlayButtons();
-        paused = false;
-        togglePlayPauseButton.children[0].className = "icon-pause";
-        togglePlayPauseButton.children[1].children[0].textContent = "Pause";
         hideSongInfo();
     }
 }
@@ -276,9 +269,6 @@ function playPreviousSong() {
         trackIndex--;
         playSong(songs[trackIndex].spotifyTrack);
         updatePlayButtons();
-        paused = false;
-        togglePlayPauseButton.children[0].className = "icon-pause";
-        togglePlayPauseButton.children[1].children[0].textContent = "Pause";
         hideSongInfo();
     }
 }
@@ -286,11 +276,9 @@ function playPreviousSong() {
 function showSongInfo() {
     click(showSongInfoButton);
 
-    if (trackIndex >= 0) {
-        songInfo.innerText = songs[trackIndex].artist + " - " + songs[trackIndex].name;
-        songInfo.classList.remove("song-info-hidden");
-        songInfo.classList.add("song-info-visible");
-    }
+    songInfo.innerText = songs[trackIndex].artist + " - " + songs[trackIndex].name;
+    songInfo.classList.remove("song-info-hidden");
+    songInfo.classList.add("song-info-visible");
 }
 
 function hideSongInfo() {
